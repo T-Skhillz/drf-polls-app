@@ -20,4 +20,15 @@ class QuestionAPITest(APITestCase):
 
         self.question_list_url = reverse("question-list")
         self.question_detail_url = reverse("question-detail", args=[self.question_owner.id])
+        self.data = {
+            "title" : "Title for API Question.",
+        }
+        self.updated_data = {
+            "title" : "Updated title for API Question."
+        }
+
+    def test_authenticated_user_can_view_their_question_list(self):
+        self.client.force_authenticate(user = self.user_owner)
+        response = self.get(self.question_list_url)
+        self.assertEqual(response.status_code, 200)
         
