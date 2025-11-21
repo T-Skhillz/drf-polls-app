@@ -4,7 +4,7 @@ from .models import Question, Choice
 class ChoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Choice
-        fields = "__all__"
+        fields = ["question", "choice_text", "votes"]
 
 class QuestionSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source = "user.username")
@@ -12,4 +12,4 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = "__all__"
+        fields = ["title", "created_at", "choices", "user", "id"]
